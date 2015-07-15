@@ -34,11 +34,11 @@ void unitTest(){
 
 
 }
+
 int main(int argc, char* argv){
 	unitTest();
 	Graphic graphic = Graphic();
 	graphic.run();
-	    
 
 	return 0;
 }
