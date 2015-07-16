@@ -24,49 +24,70 @@ bool Board::checkBeatings(PLAYER player) {
 bool Board::checkBeating(int x, int y) {
 	FIELD enemy = (board[x][y] > 0 ? WHITE : BLACK);
 	if (abs(board[x][y]) == 1) {
-		if (x < 6 && y < 6
-			&& ((board[x + 1][y + 1] == enemy) || (board[x + 1][y + 1] == 2 * enemy))
-			&& board[x + 2][y + 2] == EMPTY) {
+		if (x < 6 && y < 6 && ((board[x + 1][y + 1] == enemy) || (board[x + 1][y + 1] == 2 * enemy)) && board[x + 2][y + 2] == EMPTY) {
+			cout << "x = " << x << " y = " << y << "Bicie nr:  1" << endl;
 			return true;
 		}
-		if (x < 6
-			&& y > 1
-			&& ((board[x + 1][y - 1] == enemy) || (board[x + 1][y - 1] == 2 * enemy))
-			&& board[x + 2][y - 2] == EMPTY) {
+		if (x < 6 && y > 1 && ((board[x + 1][y - 1] == enemy) || (board[x + 1][y - 1] == 2 * enemy)) && board[x + 2][y - 2] == EMPTY) {
+			cout << "x = " << x << " y = " << y << "Bicie nr:  2" << endl;
 			return true;
 		}
-		if (x > 1
-			&& y > 1
-			&& ((board[x - 1][y - 1] == enemy) || (board[x - 1][y - 1] == 2 * enemy))
-			&& board[x - 2][y - 2] == EMPTY) {
+		if (x > 1 && y > 1 && ((board[x - 1][y - 1] == enemy) || (board[x - 1][y - 1] == 2 * enemy)) && board[x - 2][y - 2] == EMPTY) {
+			cout << "x = " << x << " y = " << y << "Bicie nr:  3" << endl;
 			return true;
 		}
-		if (x > 1
-			&& y < 6
-			&& ((board[x - 1][y + 1] == enemy) || (board[x - 1][y + 1] == 2 * enemy))
-			&& board[x - 2][y + 2] == EMPTY) {
+		if (x > 1 && y < 6 && ((board[x - 1][y + 1] == enemy) || (board[x - 1][y + 1] == 2 * enemy)) && board[x - 2][y + 2] == EMPTY) {
+			cout << "x = " << x << " y = " << y << "Bicie nr: 4 " << endl;
 			return true;
 		}
 	}
 	else if (abs(board[x][y]) == 2) {
-		for (int i = x, j = y; i < 6 && j < 6;) {
-			if ((board[++i][++j] == enemy || board[i][j] == 2*enemy) && board[i + 1][j + 1] == EMPTY) {
+		for (int i = x + 1, j = y + 1; (i <= 6) && (j <= 6); i++, j++) {
+			if ((board[i][j] == enemy || board[i][j] == 2 * enemy) && board[i + 1][j + 1] == EMPTY) {
+				cout << "x = " << x << " y = " << y << "Bicie nr:  5" << endl;
 				return true;
 			}
-		}
-		for (int i = x, j = y; i > 1 && j < 6;) {
-			if ((board[--i][++j] == enemy || board[i][j] == 2*enemy) && board[i - 1][j + 1] == EMPTY) {
-				return true;
+			else if (board[i][j] == EMPTY){
+				continue;
+			}
+			else{
+				break;
 			}
 		}
-		for (int i = x, j = y; i < 6 && j > 1;) {
-			if ((board[++i][--j] == enemy || board[i][j] == 2*enemy) && board[i + 1][j - 1] == EMPTY) {
+		for (int i = x - 1, j = y + 1; (i >= 1) && (j <= 6); i--, j++) {
+			if ((board[i][j] == enemy || board[i][j] == 2 * enemy) && board[i - 1][j + 1] == EMPTY) {
+				cout << "x = " << x << " y = " << y << "Bicie nr:  6" << endl;
 				return true;
 			}
+			else if (board[i][j] == EMPTY){
+				continue;
+			}
+			else{
+				break;
+			}
 		}
-		for (int i = x, j = y; i > 1 && j > 1;) {
-			if ((board[--i][--j] == enemy || board[i][j] == 2*enemy) && board[i - 1][j - 1] == EMPTY) {
+		for (int i = x + 1, j = y - 1; (i <= 6) && (j >= 1); i++, j--) {
+			if ((board[i][j] == enemy || board[i][j] == 2 * enemy) && board[i + 1][j - 1] == EMPTY) {
+				cout << "x = " << x << " y = " << y << "Bicie nr:  7" << endl;
 				return true;
+			}
+			else if (board[i][j] == EMPTY){
+				continue;
+			}
+			else{
+				break;
+			}
+		}
+		for (int i = x - 1, j = y - 1; (i >= 1) && (j >= 1); i--, j--) {
+			if ((board[i][j] == enemy || board[i][j] == 2 * enemy) && board[i - 1][j - 1] == EMPTY) {
+				cout << "x = " << x << " y = " << y << "Bicie nr:  8" << endl;
+				return true;
+			}
+			else if (board[i][j] == EMPTY){
+				continue;
+			}
+			else{
+				break;
 			}
 		}
 	}
@@ -74,17 +95,17 @@ bool Board::checkBeating(int x, int y) {
 } // Done 100%
 bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 	FIELD var = board[x][y];
-	if (x >= 0 && y >= 0 && x_ >= 0 && y_ >= 0 && x < 8 && y < 8 && x_ < 8 && y_ < 8 && x != x_ && y != y_) {
+	if (x >= 0 && y >= 0 && x_ >= 0 && y_ >= 0 && x < 8 && y < 8 && x_ < 8 && y_ < 8 && x != x_ && y != y_ && (abs(x - x_) == abs(y - y_))) {
 		if (var == WHITE) {
-			if (((y_ - y) == 1) && (abs(x - x_) == 1) && board[x_][y_] == EMPTY) 
+			if (((y_ - y) == 1) && (abs(x - x_) == 1) && board[x_][y_] == EMPTY)
 				return true;
-			if ((abs(y_ - y) == 2) && (abs(x - x_) == 2) && board[x_][y_] == EMPTY && (board[(x + x_) / 2][(y + y_) / 2] == BLACK || board[(x + x_) / 2][(y + y_) / 2] == BLACK_K)) 
-				return true; 
+			if ((abs(y_ - y) == 2) && (abs(x - x_) == 2) && board[x_][y_] == EMPTY && (board[(x + x_) / 2][(y + y_) / 2] == BLACK || board[(x + x_) / 2][(y + y_) / 2] == BLACK_K))
+				return true;
 			return false;
 		}
 		else if (var == BLACK) {
 			if (((y_ - y) == -1) && (abs(x - x_) == 1) && board[x_][y_] == EMPTY) return true;
-			if ((abs(y_ - y) == 2) && (abs(x - x_) == 2) && board[x_][y_] == EMPTY && (board[(x + x_) / 2][(y + y_) / 2] == WHITE || board[(x + x_) / 2][(y + y_) / 2] == WHITE_K))  
+			if ((abs(y_ - y) == 2) && (abs(x - x_) == 2) && board[x_][y_] == EMPTY && (board[(x + x_) / 2][(y + y_) / 2] == WHITE || board[(x + x_) / 2][(y + y_) / 2] == WHITE_K))
 				return true;
 			return false;
 		}
@@ -108,6 +129,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 							return false;
 						}
 					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 				else {
 					//+\-
@@ -126,6 +153,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 						else {
 							return false;
 						}
+					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
 					}
 				}
 			}
@@ -148,6 +181,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 							return false;
 						}
 					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 				else {
 					//-\-
@@ -166,6 +205,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 						else {
 							return false;
 						}
+					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
 					}
 				}
 			}
@@ -190,6 +235,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 							return false;
 						}
 					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 				else {
 					//+\-
@@ -208,6 +259,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 						else {
 							return false;
 						}
+					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
 					}
 				}
 			}
@@ -230,6 +287,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 							return false;
 						}
 					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 				else {
 					//-\-
@@ -249,6 +312,12 @@ bool Board::checkMoveTo(int x, int y, int x_, int y_) {
 							return false;
 						}
 					}
+					if (board[x_][y_] == EMPTY){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 			}
 		}
@@ -259,28 +328,35 @@ bool Board::moveTo(int x, int y, int x_, int y_) {
 	PLAYER player;
 	(board[x][y] < 0) ? player = P_WHITE : player = P_BLACK;
 	if (checkMoveTo(x, y, x_, y_)) {
-		if ((abs(x - x_) == 1) && !checkBeatings(player)) {
+		cout << "moveTo - etap 1" << endl;
+		if ((abs(board[x][y]) == 1) && (abs(x - x_) == 1) && !checkBeatings(player)) {
+			cout << "moveTo - etap 2.1 " << endl;
 			board[x_][y_] = board[x][y];
 			board[x][y] = EMPTY;
 			if ((y_ == 7 && player == -1) || (y_ == 0 && player == 1)) {
+				cout << "moveTo - etap 2.1.1" << endl;
 				board[x_][y_] = (FIELD)(player * 2);
 			}
 			return true;
 		}
-		if ((abs(x - x_) == 2)) {
+		if ((abs(x - x_) == 2) && abs(board[x][y]) == 1) {
+			cout << "moveTo - etap 2.2 " << endl;
 			board[x_][y_] = board[x][y];
 			board[x][y] = EMPTY;
 			board[(x + x_) / 2][(y + y_) / 2] = EMPTY;
 			if ((y_ == 7 && player == -1) || (y_ == 0 && player == 1)) {
+				cout << "moveTo - etap 2.2.1 " << endl;
 				board[x_][y_] = (FIELD)(player * 2);
 			}
 			return true;
 		}
-		if (abs(board[x][y]) == 2) {
+		if (abs(board[x][y]) == 2 && (!checkBeatings(player))) {
+			cout << "moveTo - etap 2.3.0 " << endl;
 			board[x_][y_] = board[x][y];
 			if (x < x_) {
 				if (y < y_) {
 					//++
+					cout << "moveTo - etap 2.3 " << endl;
 					for (; x < x_ && y < y_; x++, y++) {
 						board[x][y] = EMPTY;
 					}
@@ -288,6 +364,7 @@ bool Board::moveTo(int x, int y, int x_, int y_) {
 				}
 				else {
 					//+-
+					cout << "moveTo - etap 2.4 " << endl;
 					for (; x < x_ && y > y_; x++, y--) {
 						board[x][y] = EMPTY;
 					}
@@ -297,6 +374,7 @@ bool Board::moveTo(int x, int y, int x_, int y_) {
 			else {
 				if (y < y_) {
 					//-+
+					cout << "moveTo - etap 2.5 " << endl;
 					for (; x > x_ && y < y_; x--, y++) {
 						board[x][y] = EMPTY;
 					}
@@ -304,10 +382,66 @@ bool Board::moveTo(int x, int y, int x_, int y_) {
 				}
 				else {
 					//--
+					cout << "moveTo - etap 2.6 " << endl;
 					for (; x > x_ && y > y_; x--, y--) {
 						board[x][y] = EMPTY;
 					}
 					return true;
+				}
+			}
+		}
+		if (abs(board[x][y]) == 2 && checkBeatings(player)) {
+			cout << "Damka ma bicie " << endl;
+			if (x < x_) {
+				if (y < y_) {
+					//++
+					for (int i = x + 1, j = y + 1; i < x_ && j < y_; i++, j++){
+						if (board[i][j] != EMPTY){
+							board[i][j] = EMPTY;
+							board[x_][y_] = board[x][y];
+							board[x][y] = EMPTY;
+							return true;
+						}
+					}
+					return false;
+				}
+				else {
+					//+-
+					for (int i = x + 1, j = y - 1; i < x_ && j > y_; i++, j--){
+						if (board[i][j] != EMPTY){
+							board[i][j] = EMPTY;
+							board[x_][y_] = board[x][y];
+							board[x][y] = EMPTY;
+							return true;
+						}
+					}
+					return false;
+				}
+			}
+			else {
+				if (y < y_) {
+					//-+
+					for (int i = x - 1, j = y + 1; i > x_ && j < y_; i--, j++){
+						if (board[i][j] != EMPTY){
+							board[i][j] = EMPTY;
+							board[x_][y_] = board[x][y];
+							board[x][y] = EMPTY;
+							return true;
+						}
+					}
+					return false;
+				}
+				else {
+					//--
+					for (int i = x - 1, j = y - 1; i > x_ && j > y_; i--, j--){
+						if (board[i][j] != EMPTY){
+							board[i][j] = EMPTY;
+							board[x_][y_] = board[x][y];
+							board[x][y] = EMPTY;
+							return true;
+						}
+					}
+					return false;
 				}
 			}
 		}
@@ -318,7 +452,7 @@ bool Board::moveTo(int x, int y, int x_, int y_) {
 
 void Board::promotion(int x, int y)
 {
-	board[x][y] = FIELD(board[x][y]*2);
+	board[x][y] = FIELD(board[x][y] * 2);
 }
 
 void Board::Display() {
