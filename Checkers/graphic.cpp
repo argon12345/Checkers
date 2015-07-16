@@ -7,7 +7,7 @@ Graphic::~Graphic(){
 }
 
 void Graphic::run(){
-	sf::RenderWindow okno(sf::VideoMode(320, 240), "Kurs SFML 2.0 - http://cpp0x.pl");
+	sf::RenderWindow okno(sf::VideoMode(320, 240), "Kurs SFmML 2.0 - http://cpp0x.pl");
 	sf::Clock stoper;
 	while (okno.isOpen())
 	{
