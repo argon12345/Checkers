@@ -92,6 +92,13 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="graphic.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="black_field.bmp" />
+    <Image Include="black_field_b.bmp" />
+    <Image Include="black_field_b_k.bmp" />
+    <Image Include="black_field_w.bmp" />
+    <Image Include="black_field_w_k.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

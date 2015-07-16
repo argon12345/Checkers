@@ -33,4 +33,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="black_field_b_k.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="black_field_w.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="black_field_w_k.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="black_field.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="black_field_b.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
