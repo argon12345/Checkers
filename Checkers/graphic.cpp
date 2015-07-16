@@ -21,6 +21,19 @@ void Graphic::run(){
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left)){
+				cout << "MouseClicked" << endl;
+				mouseClicked = sf::Mouse::getPosition(window);
+			} 
+			if ((event.type == sf::Event::MouseButtonReleased) && (event.mouseButton.button == sf::Mouse::Left)){
+				cout << "X = " << mouseClicked.x / 100 << endl;
+				cout << "Y = " << 7 -( mouseClicked.y / 100) << endl;
+				cout << "W = " << sf::Mouse::getPosition(window).x / 100 << endl;
+				cout << "X = " << 7 - (sf::Mouse::getPosition().y / 100) << endl;
+				cout << "MouseRealeased" << endl;
+
+				Board::moveTo(mouseClicked.x/100, (7-mouseClicked.y/100), sf::Mouse::getPosition(window).x/100, 7-(sf::Mouse::getPosition(window).y/100));
+			}
 
 		} //while
 		window.clear(sf::Color(255, 255, 255));
