@@ -20,12 +20,14 @@ class Board {
 public:
 	Board();
 	~Board();
+	Board(const Board & board);
 	bool checkMoveTo(int, int, int, int);
 	bool checkBeatings(PLAYER);
 	bool checkBeating(int,int);
 	bool moveTo(int, int, int, int);
 	void promotion(int, int);
 	void Display();
+	FIELD getField(int, int);
 
 protected:
 	FIELD board[8][8];

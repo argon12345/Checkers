@@ -2,8 +2,6 @@
 #include "SFML\Graphics.hpp"
 
 
-using namespace sf;
-
 class Graphic : public Board
 {
 public:

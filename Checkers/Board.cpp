@@ -491,3 +491,14 @@ Board::Board() {
 Board::~Board() {
 }
 
+Board::Board(const Board & board){
+	for (size_t i = 0; i < 8; i++){
+		for (size_t j = 0; j < 8; j++){			
+			this->board[i][j] = board.board[i][j];
+		}
+	}
+}
+
+FIELD Board::getField(int x, int y){
+	return board[x][y];
+}
